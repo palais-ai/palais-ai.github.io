@@ -154,7 +154,7 @@ $headerHeight: 56px;
 }
 
 .menu-icon {
-    display: block;
+    display: none;
     float: right;
     width: 36px;
     height: 26px;
@@ -170,6 +170,10 @@ $headerHeight: 56px;
         path {
             fill: $grey-color-dark;
         }
+    }
+
+    @include media-query($on-laptop) {
+        display: block;
     }
 }
 
