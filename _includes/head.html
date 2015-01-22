@@ -20,4 +20,12 @@
     ga('create', 'UA-58829099-1', 'auto');
     ga('send', 'pageview');
   </script>
+  <script type="text/javascript" src="{{ "/js/jquery-1.11.2.min.js" | prepend: site.baseurl }}"></script>
+  <script>
+  $(document).ready(function() {
+    $('[data-toggle="offcanvas"]').click(function () {
+        $('.row-offcanvas').toggleClass('active');
+    });
+  });
+  </script>
 </head>

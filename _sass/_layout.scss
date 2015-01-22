@@ -147,6 +147,32 @@ $headerHeight: 56px;
     color: $primaryColor;
 }
 
+@include media-query($on-laptop) {
+    .sidebar-offcanvas {
+        width: 66%;
+    }
+}
+
+.menu-icon {
+    display: block;
+    float: right;
+    width: 36px;
+    height: 26px;
+    line-height: 0;
+    padding-top: 3px;
+    text-align: center;
+    line-height: $headerHeight;
+
+    > svg {
+        width: 18px;
+        height: 15px;
+
+        path {
+            fill: $grey-color-dark;
+        }
+    }
+}
+
 .site-nav {
     float: right;
     line-height: $headerHeight;
@@ -163,35 +189,17 @@ $headerHeight: 56px;
         &:not(:first-child) {
             margin-left: 20px;
         }
+        @media screen and (max-width: $on-laptop) {
+            &:not(:first-child) {
+                margin-left: 0;
+            }
+
+            line-height: 45px;
+        }
     }
 
-    @include media-query($on-palm) {
-        position: absolute;
-        top: 9px;
-        right: 30px;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
-        border-radius: 5px;
-        text-align: right;
-
-        .menu-icon {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 26px;
-            line-height: 0;
-            padding-top: 10px;
-            text-align: center;
-
-            > svg {
-                width: 18px;
-                height: 15px;
-
-                path {
-                    fill: $grey-color-dark;
-                }
-            }
-        }
+    @include media-query($on-laptop) {
+        float: none;
 
         .trigger {
             clear: both;
@@ -210,6 +218,62 @@ $headerHeight: 56px;
     }
 }
 
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+
+.row-offcanvas {
+    margin: 0;
+}
+
+@media screen and (max-width: $on-laptop) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+    margin: 0 -$spacing-unit / 2;
+    height: 100%;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 49%; /* 6 columns */
+    background-color:white;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+
+
+  }
+}
 
 
 /**
