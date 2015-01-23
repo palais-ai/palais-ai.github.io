@@ -24,7 +24,14 @@
   <script>
   $(document).ready(function() {
     $('[data-toggle="offcanvas"]').click(function () {
-        $('.row-offcanvas').toggleClass('active');
+      $('.row-offcanvas').addClass('active');
+
+      $('body').on('click', '.site-content', function() {
+        $('.row-offcanvas').removeClass('active');
+        $('body').off('click', '.site-content');
+      });
+      
+      return false;
     });
   });
   </script>

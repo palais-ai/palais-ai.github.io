@@ -3,16 +3,33 @@
 
   {% include head.html %}
 
-  <body>
+  <body class="row-offcanvas row-offcanvas-right">
 
-    {% include header.html %}
+  	<nav class="site-nav">
+	  <div class="sidebar-offcanvas" id="sidebar">
+	    {% for link in site.pages reversed %}
+	      {% if link.title %}
+	        {% if link.url == page.url %}
+	          {% assign classes = 'page-link active' %}
+	        {% else %}
+	          {% assign classes = 'page-link' %}
+	        {% endif %}
 
-    <div class="page-content">
-        {{ content }}
-    </div>
+	        <a class="{{ classes }}" href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a>
+	      {% endif %}
+	    {% endfor %}
+	  </div>
+	</nav>
 
-    {% include footer.html %}
+  	<div class="site-content">
+	    {% include header.html %}
 
+	    <div class="page-content">
+	        {{ content }}
+	    </div>
+
+	    {% include footer.html %}
+    <div>
   </body>
 
 </html>

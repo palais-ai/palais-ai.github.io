@@ -1,20 +1,30 @@
 
 $headerHeight: 56px;
+$headerBorderHeight: 5px;
+$headerIndex: 99;
+$sidebarWidth: 66%;
 
 /**
  * Site header
  */
 .site-header {
-    border-bottom: 5px solid $primaryColor;
-    min-height: 56px;
+    border-bottom: $headerBorderHeight solid $primaryColor;
+    height: $headerHeight;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: $headerIndex;
+    padding: 0 $spacing-unit / 2;
+}
 
-    // Positioning context for the mobile navigation icon
-    position: relative;
+.site-content {
+    width: 100%;
 }
 
 .site-title {
     font-size: 30px;
-    line-height: $headerHeight;
+    line-height: $headerHeight - $headerBorderHeight;
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
@@ -28,7 +38,7 @@ $headerHeight: 56px;
 
 .subtitleBox {
     margin-bottom: 0;
-    height: $headerHeight;
+    height: $headerHeight - $headerBorderHeight;
     float: left;
     display: table;
     margin-left: 16px;
@@ -40,7 +50,7 @@ $headerHeight: 56px;
     line-height: 18px;
     display: table-cell;
     vertical-align: middle;
-    color: $lightGreyColor;
+    color: $darkerGreyColor;
 }
 
 .home .jumbotron {
@@ -79,6 +89,7 @@ $headerHeight: 56px;
     padding: 16px 22px;
     border: 1px solid $darkerGreyColor;
     background-color: $lighterGreyColor;
+    margin-bottom: 24px;
 }
 
 .incentiveIcon {
@@ -149,7 +160,8 @@ $headerHeight: 56px;
 
 @include media-query($on-laptop) {
     .sidebar-offcanvas {
-        width: 66%;
+        width: 100%;
+        z-index: $headerIndex+1;
     }
 }
 
@@ -159,7 +171,6 @@ $headerHeight: 56px;
     width: 36px;
     height: 26px;
     line-height: 0;
-    padding-top: 3px;
     text-align: center;
     line-height: $headerHeight;
 
@@ -178,8 +189,11 @@ $headerHeight: 56px;
 }
 
 .site-nav {
-    float: right;
     line-height: $headerHeight;
+    position: absolute;
+    right: 0;
+    z-index: $headerIndex + 1;
+    padding-right: $spacing-unit;
 
     .menu-icon {
         display: none;
@@ -200,12 +214,14 @@ $headerHeight: 56px;
             }
 
             line-height: 45px;
-            font-size: 12px;
         }
     }
 
     @include media-query($on-laptop) {
-        float: none;
+        position: fixed;
+        padding-right: 0;
+        height: 100%;
+        width: $sidebarWidth;
 
         .trigger {
             clear: both;
@@ -234,50 +250,48 @@ $headerHeight: 56px;
 }
 
 @media screen and (max-width: $on-laptop) {
-  .row-offcanvas {
-    position: relative;
+  .row-offcanvas .site-nav {
     -webkit-transition: all .25s ease-out;
          -o-transition: all .25s ease-out;
             transition: all .25s ease-out;
-    margin: 0 -$spacing-unit / 2;
-    height: 100%;
+    min-height: 100%;
   }
 
-  .row-offcanvas-right {
-    right: 0;
+  .row-offcanvas-right .site-nav {
+    right: -$sidebarWidth;
   }
 
-  .row-offcanvas-left {
-    left: 0;
+  .row-offcanvas-left .site-nav {
+    left: -$sidebarWidth;
   }
 
   .row-offcanvas-right
   .sidebar-offcanvas {
-    right: -50%; /* 6 columns */
   }
 
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -50%; /* 6 columns */
   }
 
-  .row-offcanvas-right.active {
-    right: 50%; /* 6 columns */
+  .row-offcanvas-right.active .site-nav {
+    right: 0;
   }
 
-  .row-offcanvas-left.active {
-    left: 50%; /* 6 columns */
+  .row-offcanvas-left.active .site-nav {
+    left: 0;
   }
 
   .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 49%; /* 6 columns */
+    min-height: 100%;
     background-color:white;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+  }
 
+  .row-offcanvas-left .sidebar-offcanvas {
+    border-right: 2px solid $darkerGreyColor;
+  }
 
+  .row-offcanvas-right .sidebar-offcanvas {
+    border-left: 2px solid $darkerGreyColor;
   }
 }
 
@@ -286,8 +300,9 @@ $headerHeight: 56px;
  * Site footer
  */
 .site-footer {
-    border-top: 1px solid $grey-color-light;
+    border-top: 1px solid $darkerGreyColor;
     padding: $spacing-unit 0;
+    background-color: $lightGreyColor;
 }
 
 .footer-heading {
@@ -355,6 +370,7 @@ $headerHeight: 56px;
  */
 .page-content {
     padding: 0;
+    padding-top: $headerHeight;
 }
 
 .page-heading {
