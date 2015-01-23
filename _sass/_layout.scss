@@ -1,8 +1,7 @@
-
 $headerHeight: 56px;
 $headerBorderHeight: 5px;
 $headerIndex: 99;
-$sidebarWidth: 66%;
+$sidebarWidth: 250px;
 
 /**
  * Site header
@@ -10,6 +9,8 @@ $sidebarWidth: 66%;
 .site-header {
     border-bottom: $headerBorderHeight solid $primaryColor;
     height: $headerHeight;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     position: fixed;
     width: 100%;
@@ -203,17 +204,22 @@ $sidebarWidth: 66%;
         color: $text-color;
         line-height: $base-line-height;
         font-size: 16px;
+        font-family: 'open_sansregular';
 
         // Gaps between nav items, but not on the first one
         &:not(:first-child) {
             margin-left: 20px;
         }
         @media screen and (max-width: $on-laptop) {
+            color: $darkerGreyColor;
+
             &:not(:first-child) {
                 margin-left: 0;
             }
 
             line-height: 45px;
+            display: block;
+            padding: 12px 18px;
         }
     }
 
@@ -232,11 +238,6 @@ $sidebarWidth: 66%;
             display: block;
             padding-bottom: 5px;
         }
-
-        .page-link {
-            display: block;
-            padding: 5px 10px;
-        }
     }
 }
 
@@ -249,20 +250,25 @@ $sidebarWidth: 66%;
     margin: 0;
 }
 
+$shadowSpread: 20px;
 @media screen and (max-width: $on-laptop) {
   .row-offcanvas .site-nav {
     -webkit-transition: all .25s ease-out;
          -o-transition: all .25s ease-out;
             transition: all .25s ease-out;
     min-height: 100%;
+    background-color: #f8f8f8;
+    -webkit-box-shadow: 0px 0px $shadowSpread rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px $shadowSpread rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px $shadowSpread rgba(0, 0, 0, 0.5);
   }
 
   .row-offcanvas-right .site-nav {
-    right: -$sidebarWidth;
+    right: -$sidebarWidth - $shadowSpread;
   }
 
   .row-offcanvas-left .site-nav {
-    left: -$sidebarWidth;
+    left: -$sidebarWidth - $shadowSpread;
   }
 
   .row-offcanvas-right
@@ -283,15 +289,12 @@ $sidebarWidth: 66%;
 
   .sidebar-offcanvas {
     min-height: 100%;
-    background-color:white;
   }
 
   .row-offcanvas-left .sidebar-offcanvas {
-    border-right: 2px solid $darkerGreyColor;
   }
 
   .row-offcanvas-right .sidebar-offcanvas {
-    border-left: 2px solid $darkerGreyColor;
   }
 }
 
@@ -301,6 +304,7 @@ $sidebarWidth: 66%;
  */
 .site-footer {
     border-top: 1px solid $darkerGreyColor;
+    border-bottom: 1px solid $darkerGreyColor;
     padding: $spacing-unit 0;
     background-color: $lightGreyColor;
 }

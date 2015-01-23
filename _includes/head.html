@@ -24,13 +24,17 @@
   <script>
   $(document).ready(function() {
     $('[data-toggle="offcanvas"]').click(function () {
-      $('.row-offcanvas').addClass('active');
+      $('.row-offcanvas').toggleClass('active');
 
-      $('body').on('click', '.site-content', function() {
-        $('.row-offcanvas').removeClass('active');
+      if($('.row-offcanvas').hasClass('active')) {
+        $('body').on('click', '.site-content', function() {
+          $('.row-offcanvas').removeClass('active');
+          $('body').off('click', '.site-content');
+        });
+      } else {
         $('body').off('click', '.site-content');
-      });
-      
+      }
+
       return false;
     });
   });
