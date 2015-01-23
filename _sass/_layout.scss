@@ -191,7 +191,7 @@ $sidebarWidth: 250px;
 
 .site-nav {
     line-height: $headerHeight;
-    position: absolute;
+    position: fixed;
     right: 0;
     z-index: $headerIndex + 1;
     padding-right: $spacing-unit;
