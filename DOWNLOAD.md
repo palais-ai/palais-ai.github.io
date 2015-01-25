@@ -4,10 +4,13 @@ title: DOWNLOAD
 permalink: /download/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+<div class="container download">
+	<button class="btn btn-default row" data-link="https://github.com/palais-ai/palais-simulator/releases/download/v0.0.1-beta-win32/PalaisSetup.exe.zip"><i class="fa fa-windows"></i>WINDOWS DOWNLOAD</button>
+	<button class="btn btn-default row" data-link="https://github.com/palais-ai/palais-simulator/releases/download/v0.0.1-beta-mac/Palais.app.zip"><i class="fa fa-apple"></i>MAC OS X DOWNLOAD</button>
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-t
+	<script>
+		$('.download > button').click(function() {
+			ga('send', 'event', 'button', 'click', 'download', 1);
+		});
+	</script>
+</div>
