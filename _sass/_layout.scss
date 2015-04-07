@@ -3,6 +3,74 @@ $headerBorderHeight: 5px;
 $headerIndex: 99;
 $sidebarWidth: 250px;
 
+h1, h2 {
+    margin: 34px 0;
+    text-transform: uppercase;
+}
+
+.the-user-interface img,
+.the-user-interface p {
+    margin-bottom: 24px;
+}
+
+h2[id] {
+  padding-top: ($headerHeight+8);
+  margin-top: -($headerHeight+8);
+}
+
+.the-user-interface > p:first-child {
+    margin-bottom: 34px;
+}
+
+p .fa {
+    margin-left: 0.2ex;
+}
+
+.container .container {
+    padding: 0;
+}
+
+.tutorial-list > li { 
+    list-style-type: none;
+    margin: 5px 0;
+    &:before {
+        font-family: 'FontAwesome';
+        content: '\f054';
+        font-size: 14px;
+        margin:0 5px 0 -15px;
+        color: $text-color;
+        padding: 0 5px;
+    }
+}
+
+.callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid $darkerGreyColor;
+  border-left-width: 5px;
+  background-color: $barelyGreyColor;
+}
+
+.callout-highlight {
+  border-left-color: $primaryColor;
+}
+
+.site-nav a:hover,
+.site-header a:hover {
+    text-decoration: underline;
+    border-bottom: none;
+}
+
+.download .btn {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.install_instructions {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
 /**
  * Site header
  */
@@ -115,6 +183,8 @@ $sidebarWidth: 250px;
 .incentiveText {
     font-family: 'open_sansregular';
     font-size: 18px;
+    text-align: justify;
+    margin-bottom: 16px;
 }
 
 .incentiveRow {
@@ -219,6 +289,7 @@ $sidebarWidth: 250px;
     }
 
     .page-link {
+        text-transform: uppercase;  
         color: $text-color;
         line-height: $base-line-height;
         font-size: 16px;
@@ -323,7 +394,7 @@ $shadowSpread: 20px;
 .site-footer {
     border-top: 1px solid $darkerGreyColor;
     border-bottom: 1px solid $darkerGreyColor;
-    padding: $spacing-unit 0;
+    padding: 24px 0;
     background-color: $lightGreyColor;
 }
 
@@ -336,6 +407,14 @@ $shadowSpread: 20px;
 .social-media-list {
     list-style: none;
     margin-left: 0;
+}
+
+.contact-list .fa {
+    margin-right: 6px;
+}
+
+.contact-list > :first-child {
+    margin-bottom: 12px;
 }
 
 .footer-col-wrapper {
@@ -419,24 +498,24 @@ $shadowSpread: 20px;
 }
 
 
-
 /**
  * Posts
  */
 .post {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 44px;
+    padding-bottom: 44px;
 }
 
 .post-header {
     margin-bottom: $spacing-unit;
-    font-family: 'blogger_sansmedium';
+    font-family: 'opensans-bold';
 }
 
 .post-title {
     font-size: 42px;
     letter-spacing: -1px;
     line-height: 1;
+    margin: 0 0 20px 0;
 
     @include media-query($on-laptop) {
         font-size: 36px;

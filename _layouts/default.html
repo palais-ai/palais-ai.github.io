@@ -9,13 +9,15 @@
 	  <div class="sidebar-offcanvas" id="sidebar">
 	    {% for link in site.pages reversed %}
 	      {% if link.title %}
-	        {% if link.url == page.url %}
-	          {% assign classes = 'page-link active' %}
-	        {% else %}
-	          {% assign classes = 'page-link' %}
-	        {% endif %}
+		      {% unless link.category %}
+		        {% if link.url == page.url %}
+		          {% assign classes = 'page-link active' %}
+		        {% else %}
+		          {% assign classes = 'page-link' %}
+		        {% endif %}
 
-	        <a class="{{ classes }}" href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a>
+	        	<a class="{{ classes }}" href="{{ link.url | prepend: site.baseurl }}">{{ link.title }}</a>
+		      {% endunless %}
 	      {% endif %}
 	    {% endfor %}
 	  </div>
