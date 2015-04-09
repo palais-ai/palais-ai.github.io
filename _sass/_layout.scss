@@ -21,6 +21,37 @@ h2[id] {
   margin-top: -($headerHeight+8);
 }
 
+.documentation main.col-md-8 {
+  margin-top: 34px;
+}
+
+.documentation-sidebar {
+    list-style:none;
+    margin-left:0;
+    & > li { 
+        list-style-type: none;
+        font-weight: 400;
+        margin-bottom: 4px;
+        & > a:hover {
+            border-bottom: 2px $brand-color solid;
+        }
+    }
+}
+
+.documentation-sidebar-box {
+    padding: 16px 22px;
+    border: 1px solid #959595;
+    background-color: #f0f0f0;
+    margin-bottom: 24px;
+    margin-top: 34px;
+    margin-right: 24px;
+
+    & h2 {
+        margin-top: 4px;
+        margin-bottom: 12px;
+    }
+}
+
 .the-user-interface > p:first-child,
 .creating-a-new-project > p:first-child,
 .creating-and-importing-assets > p:first-child {
