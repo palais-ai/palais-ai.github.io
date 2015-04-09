@@ -2,5 +2,14 @@
 	<h2 id="{a{ class.name }a}">{a{ class.name }a}</h2>
 	<h4 ng-if="class.description !== 'undefined'">Description</h4>
 	<summary>{a{ class.description }a}</summary>
-	<documentationmethod ng-repeat="method in class.methods"></module>
+
+	<h4 ng-if="class.properties.length > 0">Properties</h4>
+	<ul class="property-list">
+		<li ng-repeat="property in class.properties"><strong>{a{ property.name }a}:</strong> {a{ property.description }a}</a>
+	</ul>
+
+	<h4 ng-if="class.methods.length > 0">Methods</h4>
+	<div class="method-list">
+		<documentationmethod class="doc-method-element" ng-repeat="method in class.methods"></documentationmethod>
+	</div>
 </section>

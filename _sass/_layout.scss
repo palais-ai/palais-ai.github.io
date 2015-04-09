@@ -25,6 +25,41 @@ h2[id] {
   margin-top: 34px;
 }
 
+.documentation main .documentation-class {
+    border-top: 2px solid black;
+    padding-top: 3px;
+    margin-top: 45px;
+}
+
+.documentation main h3,
+.documentation main h4 {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: "open_sanssemibold";
+}
+
+.documentation main h3 {
+    border-bottom: 1px solid $darkerGreyColor;
+    margin-bottom: 0;
+}
+
+.documentation documentationclass:first-child .documentation-class {
+    margin-top: 0px;
+}
+
+.documentation main h2 {
+    margin-bottom: 12px;
+}
+
+.documentation .parameter-list,
+.documentation .property-list {
+    list-style:none;
+    margin-left:0;
+    & > li { 
+        list-style-type: none;
+    }
+}
+
 .documentation-sidebar {
     list-style:none;
     margin-left:0;
@@ -50,6 +85,53 @@ h2[id] {
         margin-top: 4px;
         margin-bottom: 12px;
     }
+}
+
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+}
+
+.documentation main .documentation-method h3 {
+    background-color: $lighterGreyColor;
+    line-height: 35px;
+    margin-top: 0;
+
+    & > a {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display:block;
+        float: left;
+        margin-left: 8px;
+        &:after {
+            font-size: 20px;
+            content: '-'
+        }
+
+        &:hover {
+            border-bottom: 0;
+        }
+    }
+}
+
+.documentation main .documentation-method h3 > .collapsed:after {
+    content: '+'
+}
+
+.documentation main .doc-method-element:first-child h3 {
+    margin-top: 20px;
+    border-top: 1px solid $darkerGreyColor;
+}
+
+.documentation-method .method-body {
+    background-color: $barelyGreyColor;
+    padding: 16px;
+    border-bottom: 1px solid $darkerGreyColor;
+}
+
+.method-body h4:first-child {
+    margin-top: 0;
 }
 
 .the-user-interface > p:first-child,
