@@ -1,0 +1,16 @@
+<div class="documentation-method">
+	<h3>{a{ method.name }a}(<span class="parameter" ng-repeat="parameter in method.parameters">{a{ parameter.name }a}<span ng-if="parameter != method.parameters[method.parameters.length - 1]">, </span></span>)</h3>
+
+	<h4 ng-if="method.description !== 'undefined'">Description</h4>
+	<summary>{a{ method.description }a}</summary>
+
+	<h4 ng-if="method.parameters.length > 0">Parameters</h4>
+	<ul>
+		<li ng-repeat="parameter in method.parameters"><strong>{a{ parameter.name }a}:</strong> {a{ parameter.description }a}</a>
+	</ul>
+
+	<h4 ng-if="method.returnvalue !== 'undefined'">Returns</h4>
+	<span><strong>{a{ method.returnvalue.name }a}</strong> {a{ method.returnvalue.description }a}</span>
+
+	<h4 ng-if="method.examples.length > 0">Examples</h4>
+</div>
