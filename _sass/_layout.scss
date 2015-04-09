@@ -8,8 +8,11 @@ h1, h2 {
     text-transform: uppercase;
 }
 
+pre,
 .the-user-interface img,
-.the-user-interface p {
+.the-user-interface p,
+.creating-a-new-project img,
+.creating-a-new-project p {
     margin-bottom: 24px;
 }
 
@@ -18,7 +21,9 @@ h2[id] {
   margin-top: -($headerHeight+8);
 }
 
-.the-user-interface > p:first-child {
+.the-user-interface > p:first-child,
+.creating-a-new-project > p:first-child,
+.creating-and-importing-assets > p:first-child {
     margin-bottom: 34px;
 }
 
@@ -508,7 +513,7 @@ $shadowSpread: 20px;
 
 .post-header {
     margin-bottom: $spacing-unit;
-    font-family: 'opensans-bold';
+    font-family: 'open_sansbold';
 }
 
 .post-title {
