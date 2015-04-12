@@ -10,6 +10,6 @@
 
 	<h4 ng-if="class.methods.length > 0">Methods</h4>
 	<div class="method-list">
-		<documentationmethod class="doc-method-element" ng-repeat="method in class.methods"></documentationmethod>
+		<documentationmethod class="doc-method-element" ng-repeat="method in class.methods | orderBy:'name'"></documentationmethod>
 	</div>
 </section>
