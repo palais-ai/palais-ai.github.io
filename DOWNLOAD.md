@@ -16,7 +16,7 @@ permalink: /download/
 
 	<div class="row">
 		<div class="col-md-5">
-			<button class="btn btn-default" data-link="{{ "/resources/PalaisSetup.exe" | prepend: site.baseurl }}">
+			<button id="windows_dl" class="btn btn-default" data-link="{{ "/resources/PalaisSetup.exe" | prepend: site.baseurl }}">
 				<i class="fa fa-windows"></i>WINDOWS DOWNLOAD
 			</button>
 		</div>
@@ -26,7 +26,7 @@ permalink: /download/
 	</div>
 	<div class="row">
 		<div class="col-md-5">
-			<button class="btn btn-default" data-link="{{ "/resources/Palais.app.zip" | prepend: site.baseurl }}">
+			<button id="mac_dl" class="btn btn-default" data-link="{{ "/resources/Palais.app.zip" | prepend: site.baseurl }}">
 				<i class="fa fa-apple"></i>MAC OS X DOWNLOAD
 			</button>
 		</div>
@@ -36,8 +36,11 @@ permalink: /download/
 	</div>
 
 	<script>
-		$('.download > button').click(function() {
-			ga('send', 'event', 'button', 'click', 'download', 1);
+		$('#windows_dl').click(function() {
+			ga('send', 'event', 'button', 'click', 'windows_download', 1);
+		});
+		$('#mac_dl').click(function() {
+			ga('send', 'event', 'button', 'click', 'mac_download', 1);
 		});
 	</script>
 </div>
