@@ -1,6 +1,6 @@
 <div class="documentation-method">
-	<h3><a class="collapsed" data-toggle="collapse" data-target="#{a{ class.name + method.name }a}"></a> {a{ method.name }a}(<span class="parameter" ng-repeat="parameter in method.parameters">{a{ parameter.name }a}<span ng-if="parameter != method.parameters[method.parameters.length - 1]">, </span></span>) <span ng-if="method.returnvalue !== undefined"> : {a{ method.returnvalue.name }a}</span></h3>
-	<div id="{a{ class.name + method.name }a}" class=" collapse">
+	<h3><a class="collapsed" data-toggle="collapse" data-target="#{a{ class.name + method.name | encodeURIComponent }a}"></a> {a{ method.name }a}(<span class="parameter" ng-repeat="parameter in method.parameters">{a{ parameter.name }a}<span ng-if="parameter != method.parameters[method.parameters.length - 1]">, </span></span>) <span ng-if="method.returnvalue !== undefined"> : {a{ method.returnvalue.name }a}</span></h3>
+	<div id="{a{ class.name + method.name | encodeURIComponent }a}" class=" collapse">
 		<div class="method-body">
 			<h4 ng-if="method.description !== undefined">Description</h4>
 			<summary>{a{ method.description }a}</summary>

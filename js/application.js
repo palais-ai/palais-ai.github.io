@@ -20,6 +20,13 @@ angular.module('components', [])
 
 var app = angular.module('app', ['components'])
 
+// CREDITS: http://stackoverflow.com/questions/16630471/how-can-i-invoke-encodeuricomponent-from-angularjs-template
+app.filter('encodeURIComponent', function() {
+    return function(arg) {
+      return window.encodeURIComponent(arg).replace(/%.{2}/g, "_");
+    };
+});
+
 function DocClass(name, description, properties, methods) {
 	this.name = name;
   this.properties = properties;
@@ -39,6 +46,24 @@ function DocMethod(name, description, parameters, returnvalue, examples) {
   this.returnvalue = returnvalue;
   this.examples = examples;
 }
+
+var randomClass = new DocClass("Random",
+  "Provides Pseudo Random Number Generation (PRNG) utilities. Static functions from this module can be accessed via the global 'Random' (case-sensitive) variable. NOTE: The random seed is reset to a fixed value everytime a Scene is loaded, which means all 'random' results are actually reproducible.",
+  [],
+  [
+  new DocMethod("[static] uniform", 
+                 "Produces a single pseudo-random real number from a uniform distribution.", 
+                 [new DocVar("lowNumber", "The lowest number (inclusive) in the uniform range. (optional, default: 0)"),
+                  new DocVar("highNumber", "The highest number (inclusive) in the uniform range. (optional, default: 1)")],
+                 new DocVar("value", 
+                            "The produced value.")),
+  new DocMethod("[static] uniformInt", 
+                 "Produces a single pseudo-random integer from a uniform distribution.", 
+                 [new DocVar("lowNumber", "The lowest number (inclusive) in the uniform range. (optional, default: 0)"),
+                  new DocVar("highNumber", "The highest number (inclusive) in the uniform range. (optional, default: 1)")],
+                 new DocVar("value", 
+                            "The produced integer."))
+  ]);
 
 var timerClass = new DocClass("Timer",
   "Timers are used to execute script code in the future. There are two main types of timers: repeating and one-shot timers. Timer methods are available in the global JS scope.",
@@ -71,11 +96,16 @@ var timerClass = new DocClass("Timer",
 
 var vector3Class = new DocClass("Vector3",
   "The Vector3 class represents a three-dimensional vector primitive.",
-  [new DocVar("x", "The x component of the 3D vector."), new DocVar("y", "The y component of the 3D vector."), new DocVar("z", "The z component of the 3D vector.")],
+  [new DocVar("x", "The x component of the 3D vector."),
+   new DocVar("y", "The y component of the 3D vector."), 
+   new DocVar("z", "The z component of the 3D vector.")
+  ],
   [
   new DocMethod("Vector3",
                 "Constructs a Vector3 object. Must be called with the 'new' operator.",
-                [new DocVar("x", "The x component of the 3D vector. (optional, default: 0)"), new DocVar("y", "The y component of the 3D vector. (optional, default: 0)"), new DocVar("z", "The z component of the 3D vector. (optional, default: 0)")],
+                [new DocVar("x", "The x component of the 3D vector. (optional, default: 0)"), 
+                new DocVar("y", "The y component of the 3D vector. (optional, default: 0)"), 
+                new DocVar("z", "The z component of the 3D vector. (optional, default: 0)")],
                 new DocVar("v", "The Vector3 object.")),
   new DocMethod("add", 
                 "Adds the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. Note that neither of the original values are modified.",
@@ -197,6 +227,19 @@ var sceneClass = new DocClass("Scene",
    new DocVar("name", "The name of the currently loaded project. (read-only)"), 
    new DocVar("actors", "A list of the currently active actors in the scene. (read-only)")],
   [
+    new DocMethod("createDrawer",
+                  "Creates a named Drawer object.",
+                  [
+                   new DocVar("name", "The name of the Drawer."),
+                   new DocVar("opacity", "The opacity of all the primitives that will be drawn by the created Drawer. Value range: [0.0, 1.0]. (optional, default: 0.5)")
+                  ],                   
+                  new DocVar("drawer", "The created Drawer or null in case of an error. (Drawer)")
+                  ),
+    new DocMethod("destroyDrawer",
+                  "Destroys a named Drawer object.",
+                  [
+                   new DocVar("name / drawer", "The name of the drawer or the Drawer object itself.")
+                  ]),
     new DocMethod("instantiate",
                   "Dynamically instantiates a new actor in current the scene.",
                   [
@@ -223,11 +266,13 @@ var sceneClass = new DocClass("Scene",
                   [new DocVar("actor", "The actor to be attached to the scene.")]),
     new DocMethod("raycast",
                   "Performs a raycast in the scene. Returns the first hit object. Note that the query operates on the axis-aligned bounding boxes of actors. This means that for free-form objects the query is not 100% accurate.",
-                  [new DocVar("origin", "A Vector3 representing the origin of the ray."), new DocVar("direction", "A Vector3 representing the direction of the ray. Doesn't have to be normalized.")],
+                  [new DocVar("origin", "A Vector3 representing the origin of the ray."), 
+                  new DocVar("direction", "A Vector3 representing the direction of the ray. Doesn't have to be normalized.")],
                   new DocVar("result", "A RaycastResult representing the result of the raycast operation.")),
     new DocMethod("rangeQuery",
                   "Performs a range query in the scene. Returns all objects contained within a sphere of the specified radius. Note that the query operates on the axis-aligned bounding boxes of actors. This means that for free-form objects the query is not 100% accurate.",
-                  [new DocVar("origin", "A Vector3 representing the origin of the sphere."), new DocVar("distance", "A number representing the radius of the sphere.")],
+                  [new DocVar("origin", "A Vector3 representing the origin of the sphere."), 
+                  new DocVar("distance", "A number representing the radius of the sphere.")],
                   new DocVar("result", "A RangeQueryResult representing the result of the range query operation.")),
     new DocMethod("hasActor",
                   "Returns whether or not an actor with the given name exists in the scene.",
@@ -272,9 +317,14 @@ var actorClass = new DocClass("Actor",
                  "Returns the string representation of the actor.",
                 [],
                 new DocVar("stringRepresentation", "The actor represented as a string.")),
+  new DocMethod("rotateBy",
+                "Rotates the actor around an angle. This method is provided for convenience. The Quaternion class offers more sophisticated rotation methods.",
+                [new DocVar("axis", "The axis around which to rotate the actor."),
+                new DocVar("angleDegrees", "The amount of degrees to rotate the actor.")]
+                ),
    new DocMethod("attach",
-                  "Attaches another actor to the actor. Its position, orientation and scale will be in the actor's frame of reference.",
-                  [new DocVar("actor", "The other actor to be attached to this actor.")])
+                  "Attaches another actor to the actor. Its position, orientation and scale will be in the actor's frame of reference. You can attach an actor to the global 'Scene' object to detach it again. Every actor is attached either to another actor or to the scene, which is the root frame of reference.",
+                  [new DocVar("actor", "The other actor to be attached to this actor. (Actor)")])
   ]);
 
 var rangeQueryClass = new DocClass("RangeQueryResult",
@@ -286,14 +336,88 @@ var rayQueryClass = new DocClass("RangeQueryResult",
                                  [new DocVar("actor", "The first hit actor."),
                                   new DocVar("distance", "The distance travelled from the origin to the first hit. Note that the first hit is calculated via an actor's axis aligned bounding box, which may significantly differ from the actors 'position' property.")]);
 
+var colorClass = new DocClass("Color",
+  "The Color class represents colors in PALAIS.",
+  [
+   new DocVar("r", "The red component of the color. Value range: [0.0, 1.0]."), 
+   new DocVar("g", "The green component of the color. Value range: [0.0, 1.0]."), 
+   new DocVar("b", "The blue component of the color. Value range: [0.0, 1.0]."), 
+   new DocVar("a", "The alpha component of the color. Value range: [0.0, 1.0].")
+  ],
+  [
+  new DocMethod("Color",
+                "Constructs a Color object. Must be called with the 'new' operator.",
+                [
+                 new DocVar("r", "The w component of the quaternion. (optional, default: 0)"), 
+                 new DocVar("g", "The x component of the quaternion. (optional, default: 0)"), 
+                 new DocVar("b", "The y component of the quaternion. (optional, default: 0)"), 
+                 new DocVar("a", "The z component of the quaternion. (optional, default: 0)")
+                ],
+                new DocVar("c", "The Color object.")),
+   new DocMethod("toString",
+                 "Returns the string representation of the color.",
+                [],
+                new DocVar("stringRepresentation", "The color represented as a string."))
+  ]);
+
+var drawerClass = new DocClass("Drawer",
+  "The Drawer class provides visualisation primitives that you can use to draw in your scene. You can create and destroy named Drawer objects by using the factory methods provided in the global 'Scene' object. Drawers are registered as programmable actors.",
+  [],
+  [
+   new DocMethod("drawLine",
+                 "Draws a solid line.",
+                 [new DocVar("start", "The start point of the line. (Vector3)"),
+                 new DocVar("end", "The end point of the line. (Vector3)"),
+                 new DocVar("color", "The color of the line. (Color)")]),
+   new DocMethod("drawCircle",
+                 "Draws a circle.",
+                 [new DocVar("center", "The center point of the circle. (Vector3)"),
+                 new DocVar("radius", "The radius of the circle."),
+                 new DocVar("numSegments", "The number of subdivision segments."),
+                 new DocVar("color", "The color of the circle. (Color)"),
+                 new DocVar("isFilled", "Whether or not the primitive is filled. Otherwise it is a wireframe. (optional, default: false)")]),
+   new DocMethod("drawCylinder",
+                 "Draws a cylinder.",
+                 [new DocVar("center", "The center point of the cylinder. (Vector3)"),
+                 new DocVar("radius", "The radius of the cylinder."),
+                 new DocVar("numSegments", "The number of subdivision segments."),
+                 new DocVar("height", "The height of the cylinder."),
+                 new DocVar("color", "The color of the cylinder. (Color)"),
+                 new DocVar("isFilled", "Whether or not the primitive is filled. Otherwise it is a wireframe. (optional, default: false)")]),
+   new DocMethod("drawSphere",
+                 "Draws a sphere.",
+                 [new DocVar("center", "The center point of the sphere. (Vector3)"),
+                 new DocVar("radius", "The radius of the sphere."),
+                 new DocVar("color", "The color of the sphere. (Color)"),
+                 new DocVar("isFilled", "Whether or not the primitive is filled. Otherwise it is a wireframe. (optional, default: false)")]),
+   new DocMethod("drawTetrahedron",
+                 "Draws a tetrahedron.",
+                 [new DocVar("center", "The center point of the tetrahedron. (Vector3)"),
+                 new DocVar("scale", "The scale of the tetrahedron."),
+                 new DocVar("color", "The color of the tetrahedron. (Color)"),
+                 new DocVar("isFilled", "Whether or not the primitive is filled. Otherwise it is a wireframe. (optional, default: false)")]),
+   new DocMethod("clear",
+                 "Clears all primitives drawn by this Drawer."),
+   new DocMethod("drawArrow",
+                 "Draws an arrow with a sphere head as its tip.",
+                 [new DocVar("start", "The start point of the line. (Vector3)"),
+                 new DocVar("end", "The end point of the line. (Vector3)"),
+                 new DocVar("color", "The color of the line. (Color)"),
+                 new DocVar("radius", "The radius of the sphere-shaped head (optional, default: 0.02).")])
+
+  ]);
+
 app.controller('DocumentationController', function($scope){
-	$scope.classes = [timerClass,
+	$scope.classes = [randomClass,
+            timerClass,
 					  vector3Class,
             quaternionClass,
 					  sceneClass,
 					  actorClass,
 					  rangeQueryClass,
-					  rayQueryClass]
+					  rayQueryClass,
+            colorClass,
+            drawerClass]
 
   $scope.classes.sort(function(a, b){
       if(a.name < b.name) return -1;

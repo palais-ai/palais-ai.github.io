@@ -10,8 +10,8 @@ permalink: /download/
 	</div>
 
 	<div class="row">
-		<div class="col-md-3"><b>Latest Version:</b> v0.0.2-beta</div>
-		<div class="col-md-3"><b>Release Date:</b> 14th April 2015</div>
+		<div class="col-md-3"><b>Latest Version:</b> v0.0.3-beta</div>
+		<div class="col-md-3"><b>Release Date:</b> 2nd May 2015</div>
 	</div>
 
 	<div class="row">
