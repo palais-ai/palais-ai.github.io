@@ -21,7 +21,7 @@ tag: 3
 		PALAIS will automatically import the assets you named in your project's meta data file in the <em>resources</em> and <em>scene</em> properties. You can find out more about the meta data file and projects in general in the tutorial <a href="{{ "/tutorials/creating-a-new-project/" | prepend: site.baseurl }}">Creating a New Project</a>.
 	</p>
 	<p>
-		In this tutorial we will be using <a href="http://www.blender.org/">blender</a> and the <a href="https://bitbucket.org/MindCalamity/blender2ogre">OGRE exporter</a> to import a cube model in a PALAIS project. You can download the project used in this tutorial <a href="{{ "/resources/ImportingAssets.zip" | prepend: site.baseurl }}">here</a>.
+		In this tutorial we will be using <a href="http://www.blender.org/">blender</a> and the <a href="https://bitbucket.org/MindCalamity/blender2ogre">OGRE exporter</a> to import a cube model in a PALAIS project. You can download the project used in this tutorial here: <a href="{{ "/resources/cube_scene.zip" | prepend: site.baseurl }}">The cube_scene project</a>.
 	</p>
 
 	<h2>STEP 1: Create Your Model</h2>
