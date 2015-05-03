@@ -43,4 +43,20 @@ permalink: /download/
 			ga('send', 'event', 'button', 'click', 'mac_download', 1);
 		});
 	</script>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Changelogs</h2>
+
+			<h3>Version 0.0.3-beta / 2nd May 2015</h3>
+			<ul>
+				<li>Added script bindings for drawing geometric primitives (lines, spheres, arrows..) onto the scene. (Drawer API)</li>
+				<li>Added script bindings for generating pseudo-random numbers. (Random API)</li>
+				<li>Added script bindings for colors. (Color API)</li>
+				<li>Added a convenience rotateBy method to the Actor script bindings. (Actor API)</li>
+				<li>Fixed a crash that happened if a scene was reloaded while an actor was being focused by the camera.</li>
+				<li>Fixed a bug that caused the scene timer not to reset when a new scenario was loaded.</li>
+			</ul>
+		</div>
+	</div>
 </div>
