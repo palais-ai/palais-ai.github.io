@@ -407,6 +407,15 @@ var drawerClass = new DocClass("Drawer",
 
   ]);
 
+var moduleClass = new DocClass("Modules",
+  "The module system allows you to split your source code into modular javascript files. The functions in this module are available in the global namespace.",
+  [],
+  [
+   new DocMethod("[static] require",
+                 "Requires that the code of the source file with the specified name is included into this source file. The file is searched in the current search directories as listed in the '__PATH__' array. The current project directory is automatically added to the __PATH__. You can manually add other directories to the __PATH__ variable.",
+                 [new DocVar("filename", "The name of the javascript source file (with its file extension) you want to include. NOT a full filepath. (string)")])
+  ]);
+
 app.controller('DocumentationController', function($scope){
 	$scope.classes = [randomClass,
             timerClass,
@@ -417,7 +426,8 @@ app.controller('DocumentationController', function($scope){
 					  rangeQueryClass,
 					  rayQueryClass,
             colorClass,
-            drawerClass]
+            drawerClass,
+            moduleClass]
 
   $scope.classes.sort(function(a, b){
       if(a.name < b.name) return -1;
