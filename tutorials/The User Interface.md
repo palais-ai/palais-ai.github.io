@@ -1,12 +1,18 @@
 ---
 layout: page
-title: The User Interface
+title: T-01 The User Interface
 permalink: /tutorials/the-user-interface/
 category: tutorial
 tag: 1
 ---
 
-<div class="the-user-interface">
+<div class="the-user-interface">	
+	<h2>Learning Goal</h2>
+	<p>
+		The goal of this tutorial is to provide an overview of the (runtime) features of PALAIS and how they can be accessed via the GUI.
+	</p>
+
+	<h2>Structure</h2>
 	<p>
 		The GUI of PALAIS is separated in four distinct areas: The <a href="#scene">Scene View</a>, the <a href="#overview">Scene Overview</a>, the <a href="#console">Console</a> and the <a href="#knowledge">Knowledge Inspector</a>. There are hotkeys to quickly access most of the GUI actions. The hotkeys are displayed next to the corresponding entry in the menu bar of PALAIS.
 	</p>

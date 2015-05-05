@@ -27,11 +27,29 @@ app.filter('encodeURIComponent', function() {
     };
 });
 
-function DocClass(name, description, properties, methods) {
+function DocClass(name, description, properties, methods, events) {
 	this.name = name;
   this.properties = properties;
   this.description = description;
   this.methods = methods;
+  this.events = events;
+}
+
+function mergeClasses(c1, c2) {
+  if(c1.properties === undefined) {
+    c1.properties = []
+  }
+  c1.properties = c1.properties.concat(c2.properties);
+
+  if(c1.methods === undefined) {
+    c1.methods = []
+  }
+  c1.methods = c1.methods.concat(c2.methods);
+
+  if(c1.events === undefined) {
+    c1.events = []
+  }
+  c1.events = c1.events.concat(c2.events);
 }
 
 function DocVar(name, description) {
@@ -46,6 +64,35 @@ function DocMethod(name, description, parameters, returnvalue, examples) {
   this.returnvalue = returnvalue;
   this.examples = examples;
 }
+
+var knowledgeClass = new DocClass("KnowledgeModel",
+  "...",
+  [],
+  [new DocMethod("getKnowledge",
+                 "Retrieves a named knowledge item's value.",
+                 [new DocVar("key", "The key of the knowledge item to be retrieved. (string)")],
+                 new DocVar("value", "The value of the knowledge item with the given key or a default constructed value if it doesn't exist. You can check for existance before using getKnowledge by using the hasKnowledge method.")),
+   new DocMethod("hasKnowledge",
+                 "Checks whether or not this object's blackboard contains a named knowledge item.",
+                 [new DocVar("key", "The key of the knowledge item to be checked. (string)")],
+                 new DocVar("flag", "A boolean flag that is true if the knowledge item with the given key exists, and false, if not.")),
+   new DocMethod("setKnowledge",
+                 "Sets a knowledge item's value. A new knowledge item is added to the blackboard if the given key doesn't exist otherwise the existing entry's value is changed.",
+                 [new DocVar("key", "The key of the knowledge item to be set."),
+                  new DocVar("value", "The value of the knowledge item to be set.")])
+  ],
+  [new DocMethod("knowledgeAdded", 
+                 "This event is broadcast when a new knowledge key is added to the blackboard.",
+                 [new DocVar("key", "The name of the knowledge item that was added."),
+                  new DocVar("value", "The value of the knowledge item that was added.")]),
+   new DocMethod("knowledgeChanged", 
+                 "This event is broadcast when a knowledge key's associated value changes.",
+                 [new DocVar("key", "The name of the knowledge item that was changed."),
+                  new DocVar("value", "The value of the knowledge item that was changed.")]),
+   new DocMethod("knowledgeRemoved", 
+                 "This event is broadcast when a new knowledge key is removed from the blackboard.",
+                 [new DocVar("key", "The name of the knowledge item that was removed.")])
+   ]);
 
 var randomClass = new DocClass("Random",
   "Provides Pseudo Random Number Generation (PRNG) utilities. Static functions from this module can be accessed via the global 'Random' (case-sensitive) variable. NOTE: The random seed is reset to a fixed value everytime a Scene is loaded, which means all 'random' results are reproducible.",
@@ -108,19 +155,19 @@ var vector3Class = new DocClass("Vector3",
                 new DocVar("z", "The z component of the 3D vector. (optional, default: 0)")],
                 new DocVar("v", "The Vector3 object.")),
   new DocMethod("add", 
-                "Adds the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. Note that neither of the original values are modified.",
+                "Adds the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. ",
                 [new DocVar("other", "The vector or scalar on the right side of the mathematical expression.")],
                 new DocVar("result", "A Vector3 object that represents the result of the expression.")),
   new DocMethod("subtract", 
-                "Subtracts the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. Note that neither of the original values are modified.",
+                "Subtracts the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. ",
                 [new DocVar("other", "The vector or scalar on the right side of the mathematical expression.")],
                 new DocVar("result", "A Vector3 object that represents the result of the expression.")),
   new DocMethod("multiply", 
-                "Multiplies the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. Note that neither of the original values are modified.",
+                "Multiplies the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. ",
                 [new DocVar("other", "The vector or scalar on the right side of the mathematical expression.")],
                 new DocVar("result", "A Vector3 object that represents the result of the expression.")),
   new DocMethod("divide", 
-                "Divides the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. Note that neither of the original values are modified.",
+                "Divides the vector componentwise by a scalar or a vector and returns the result. Scalar other values are treated as if they were a vector with all components equal to the scalar value. ",
                 [new DocVar("other", "The vector or scalar on the right side of the mathematical expression.")],
                 new DocVar("result", "A Vector3 object that represents the result of the expression.")),
   new DocMethod("normalize",
@@ -143,7 +190,7 @@ var vector3Class = new DocClass("Vector3",
                 new DocVar("value", "A number representing the cross product of the two vectors.")
                 ),
   new DocMethod("rotateBy",
-                "Rotates the vector by a quaternion and returns the result. Note that neither of the original values are modified.",
+                "Rotates the vector by a quaternion and returns the result. ",
                 [new DocVar("quaternion", "The rotation to apply.")],
                 new DocVar("rotated", "The rotated vector.")
                 ),
@@ -181,7 +228,7 @@ var quaternionClass = new DocClass("Quaternion",
                 ],
                 new DocVar("q", "The Quaternion object.")),
   new DocMethod("multiply", 
-                "Multiplies the quaternion by another quaternion and returns the result. Note that neither of the original values are modified.",
+                "Multiplies the quaternion by another quaternion and returns the result. ",
                 [new DocVar("other", "The quaternion on the right side of the mathematical expression.")],
                 new DocVar("result", "A Quaternion object that represents the result of the expression.")),
   new DocMethod("normalize",
@@ -325,6 +372,15 @@ var actorClass = new DocClass("Actor",
    new DocMethod("attach",
                   "Attaches another actor to the actor. Its position, orientation and scale will be in the actor's frame of reference. You can attach an actor to the global 'Scene' object to detach it again. Every actor is attached either to another actor or to the scene, which is the root frame of reference.",
                   [new DocVar("actor", "The other actor to be attached to this actor. (Actor)")])
+  ],
+  [
+  new DocMethod("removedFromScene",
+                "This event is broadcast before the actor is removed from the scene (e.g. by calling 'Scene.destroy()' ).",
+                [new DocVar("actor", "The actor that is being removed. (Actor)")]),
+  new DocMethod("visibilityChanged",
+                "This event is broadcast when an actor's visibility changes (e.g. by calling .hide() or .show()).",
+                [new DocVar("actor", "The actor that has had its visibility changed. (Actor)"),
+                 new DocVar("isVisible", "A flag indicating whether or not the actor is visible.")])
   ]);
 
 var rangeQueryClass = new DocClass("RangeQueryResult",
@@ -417,6 +473,9 @@ var moduleClass = new DocClass("Modules",
   ]);
 
 app.controller('DocumentationController', function($scope){
+  mergeClasses(actorClass, knowledgeClass);
+  mergeClasses(sceneClass, knowledgeClass);
+
 	$scope.classes = [randomClass,
             timerClass,
 					  vector3Class,

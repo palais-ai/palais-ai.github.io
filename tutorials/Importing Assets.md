@@ -1,12 +1,20 @@
 ---
 layout: page
-title: Creating and Importing Assets
+title: T-03 Creating and Importing Assets
 permalink: /tutorials/creating-and-importing-assets/
 category: tutorial
 tag: 3
 ---
 
 <div class="creating-and-importing-assets">
+	<p>
+		You can download the project used in this tutorial here: <a href="{{ "/resources/cube_scene.zip" | prepend: site.baseurl }}">The cube_scene project</a>.
+	</p>
+	<h2>Learning Goal</h2>
+	<p>
+		The goal of this tutorial is to demonstrate the project creation workflow and the structure of a project in PALAIS.
+	</p>
+	<h2>Introduction</h2>
 	<p>
 		PALAIS works independently of any asset creation workflow you wish to employ. Thus you can use your favorite 3D modeling tool to create 3D models and scenes that can be imported in PALAIS. Examples of such 3D modeling tools are <a href="http://www.blender.org/">blender</a>, <a href="http://www.autodesk.de/products/3ds-max/overview">3ds Max</a> and <a href="http://www.autodesk.de/products/maya/overview">Maya</a>.
 	</p>
@@ -21,7 +29,7 @@ tag: 3
 		PALAIS will automatically import the assets you named in your project's meta data file in the <em>resources</em> and <em>scene</em> properties. You can find out more about the meta data file and projects in general in the tutorial <a href="{{ "/tutorials/creating-a-new-project/" | prepend: site.baseurl }}">Creating a New Project</a>.
 	</p>
 	<p>
-		In this tutorial we will be using <a href="http://www.blender.org/">blender</a> and the <a href="https://bitbucket.org/MindCalamity/blender2ogre">OGRE exporter</a> to import a cube model in a PALAIS project. You can download the project used in this tutorial here: <a href="{{ "/resources/cube_scene.zip" | prepend: site.baseurl }}">The cube_scene project</a>.
+		In this tutorial we will be using <a href="http://www.blender.org/">blender</a> and the <a href="https://bitbucket.org/MindCalamity/blender2ogre">OGRE exporter</a> to import a cube model in a PALAIS project.
 	</p>
 
 	<h2>STEP 1: Create Your Model</h2>

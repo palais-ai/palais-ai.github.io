@@ -1,17 +1,20 @@
 ---
 layout: page
-title: Creating a New Project
+title: T-02 Creating a New Project
 permalink: /tutorials/creating-a-new-project/
 category: tutorial
 tag: 2
 ---
 
 <div class="creating-a-new-project">
+	<h2>Learning Goal</h2>
+	<p>
+		The goal of this tutorial is to demonstrate the project creation workflow and the structure of a project in PALAIS.
+	</p>
+	<h2>The New Project Dialog</h2>
 	<p>
 		The easiest way to set up a new project in PALAIS is to use the <em>"New project"</em> dialog. You can access the <em>"New project"</em> dialog through the menu bar or by pressing [CTRL] + [N] on Windows or [CMD] + [N] on Mac.
 	</p>
-
-	<h2>The New Project Dialog</h2>
 	<div class="row">
 		<div class="col-md-6">
 			<p>
