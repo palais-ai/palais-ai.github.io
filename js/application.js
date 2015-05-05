@@ -48,7 +48,7 @@ function DocMethod(name, description, parameters, returnvalue, examples) {
 }
 
 var randomClass = new DocClass("Random",
-  "Provides Pseudo Random Number Generation (PRNG) utilities. Static functions from this module can be accessed via the global 'Random' (case-sensitive) variable. NOTE: The random seed is reset to a fixed value everytime a Scene is loaded, which means all 'random' results are actually reproducible.",
+  "Provides Pseudo Random Number Generation (PRNG) utilities. Static functions from this module can be accessed via the global 'Random' (case-sensitive) variable. NOTE: The random seed is reset to a fixed value everytime a Scene is loaded, which means all 'random' results are reproducible.",
   [],
   [
   new DocMethod("[static] uniform", 
@@ -331,7 +331,7 @@ var rangeQueryClass = new DocClass("RangeQueryResult",
                                    "The result of a range query operation.",
                                    [new DocVar("actors", "The list of actors within the queried sphere.")]);
 
-var rayQueryClass = new DocClass("RangeQueryResult",
+var rayQueryClass = new DocClass("RaycastResult",
                                  "The result of a raycast operation.",
                                  [new DocVar("actor", "The first hit actor."),
                                   new DocVar("distance", "The distance travelled from the origin to the first hit. Note that the first hit is calculated via an actor's axis aligned bounding box, which may significantly differ from the actors 'position' property.")]);
