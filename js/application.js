@@ -245,9 +245,9 @@ var sceneClass = new DocClass("Scene",
                   [
                    new DocVar("name", "The name of the created actor."),
                    new DocVar("meshName", "The name of the visual representation (mesh-file) to be assigned to the created actor."),
-                   new DocVar("position", "The initial position of the created actor. (Vector3)"),
-                   new DocVar("rotation", "The initial rotation of the created actor. (Quaternion)"),
-                   new DocVar("scale", "The initial scale of the created actor. (Vector3)")
+                   new DocVar("position", "The initial position of the created actor. (Vector3) (optional, default: x: 0, y: 0, z: 0)"),
+                   new DocVar("rotation", "The initial rotation of the created actor. (Quaternion) (optional, default: Identity quaternion)"),
+                   new DocVar("scale", "The initial scale of the created actor. (Vector3) (optional, default: x: 1, y: 1, z: 1)")
                   ],                   
                   new DocVar("actor", "The created actor or null in case of an error.")
                   ),
