@@ -12,7 +12,7 @@ tag: 4
 	</p>
 	<h2>Learning Goal</h2>
 	<p>
-	 	The goal of this tutorial is to get familiar with the scripting API of PALAIS within a pre-made movement playground. In particular we will be covering the Vector API and actor movement. Finally, we will discuss how we realised this steering playground environment within PALAIS using just 67 lines of code.
+	 	The goal of this tutorial is to get familiar with the scripting API of PALAIS within a pre-made movement playground. In particular, we will be covering the Vector API and actor movement. Finally, we will discuss how we realised this steering playground environment within PALAIS using just 67 lines of code.
 	</p>
 	<h2>The Scene Logic</h2>
 	<div class="row">

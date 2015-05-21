@@ -2,7 +2,7 @@
 title: PALAIS - A 3D simulation environment for Artificial Intelligence in Games.
 email: admin@palais.io
 description: > # this means to ignore newlines until "baseurl:"
-  PALAIS is a free simulation environment for Artificial Intelligence in Games.
+  PALAIS is a free, open source sandbox environment for Artificial Intelligence in Games.
   It provides much of the functionality commonly required for authoring, testing 
   and prototyping of AI behaviors.
 baseurl: "" # the subpath of your site, e.g. /blog/

@@ -1,9 +1,9 @@
 ---
 layout: page
-title: T-05 Implementing Decision Making / Capture the Flag
+title: T-06 Implementing Decision Making / Capture the Flag
 permalink: /tutorials/implementing-decision-making-capture-the-flag/
 category: tutorial
-tag: 5
+tag: 6
 ---
 
 <div class="implementing-custom-behavior">

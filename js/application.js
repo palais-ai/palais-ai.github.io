@@ -65,6 +65,17 @@ function DocMethod(name, description, parameters, returnvalue, examples) {
   this.examples = examples;
 }
 
+var debugClass = new DocClass("Debug",
+  "The Debug module provides simple debugging facilities.",
+  [],
+  [new DocMethod("[global] print",
+                 "Outputs a textual representation of the input value to the environment's console.",
+                 [new DocVar("value", 
+                             "The value to be printed. Must be either a primitive object (e.g. bool, string, number..) or a custom object that defines a '.toString' method returning a textual representation of the custom object.")]
+                 )
+  ]
+  );
+
 var knowledgeClass = new DocClass("KnowledgeModel",
   "...",
   [],
@@ -98,13 +109,13 @@ var randomClass = new DocClass("Random",
   "Provides Pseudo Random Number Generation (PRNG) utilities. Static functions from this module can be accessed via the global 'Random' (case-sensitive) variable. NOTE: The random seed is reset to a fixed value everytime a Scene is loaded, which means all 'random' results are reproducible.",
   [],
   [
-  new DocMethod("[static] uniform", 
+  new DocMethod("uniform", 
                  "Produces a single pseudo-random real number from a uniform distribution.", 
                  [new DocVar("lowNumber", "The lowest number (inclusive) in the uniform range. (optional, default: 0)"),
                   new DocVar("highNumber", "The highest number (inclusive) in the uniform range. (optional, default: 1)")],
                  new DocVar("value", 
                             "The produced value.")),
-  new DocMethod("[static] uniformInt", 
+  new DocMethod("uniformInt", 
                  "Produces a single pseudo-random integer from a uniform distribution.", 
                  [new DocVar("lowNumber", "The lowest number (inclusive) in the uniform range. (optional, default: 0)"),
                   new DocVar("highNumber", "The highest number (inclusive) in the uniform range. (optional, default: 1)")],
@@ -116,24 +127,24 @@ var timerClass = new DocClass("Timer",
   "Timers are used to execute script code in the future. There are two main types of timers: repeating and one-shot timers. Timer methods are available in the global JS scope.",
   [],
   [
-  new DocMethod("[static] setTimeout", 
+  new DocMethod("[global] setTimeout", 
                  "Creates a one-shot timer. The script code will be called once after the specified time interval has passed.", 
                  [new DocVar("time", "A number that specifies when the timer code should be executed relative to the current time. (in milliseconds)"),
                   new DocVar("function", "A function that will be invoked when the timer is executed.")],
                  new DocVar("handle", 
                             "An integer ID that identifies the created timer. It can be used to remove the timer before it is executed.")),
-  new DocMethod("[static] clearTimeout", 
+  new DocMethod("[global] clearTimeout", 
                  "Removes a one-shot timer using its integer ID.", 
                  [new DocVar("handle", 
                              "An integer ID that identifies the timer that should be destroyed. This identifier is obtained by storing the return value of setTimeout.")]
                  ),
-  new DocMethod("[static] setInterval", 
+  new DocMethod("[global] setInterval", 
                  "Creates a repeating timer. The script code will be called repeatedly whenever the specified time interval has passed.", 
                  [new DocVar("time", "A number that specifies in what time interval the timer should be executed. (in milliseconds)"),
                   new DocVar("function", "A function that will be invoked when the timer is executed.")],
                  new DocVar("handle", 
                             "An integer ID that identifies the created timer. It can be used to remove the timer before it is executed.")),
-  new DocMethod("[static] clearInterval", 
+  new DocMethod("[global] clearInterval", 
                  "Removes a repeating timer using its integer ID.", 
                  [new DocVar("handle", 
                              "An integer ID that identifies the timer that should be destroyed. This identifier is obtained by storing the return value of setInterval.")]
@@ -404,10 +415,10 @@ var colorClass = new DocClass("Color",
   new DocMethod("Color",
                 "Constructs a Color object. Must be called with the 'new' operator.",
                 [
-                 new DocVar("r", "The w component of the quaternion. (optional, default: 0)"), 
-                 new DocVar("g", "The x component of the quaternion. (optional, default: 0)"), 
-                 new DocVar("b", "The y component of the quaternion. (optional, default: 0)"), 
-                 new DocVar("a", "The z component of the quaternion. (optional, default: 0)")
+                 new DocVar("r", "The red component of the color. (optional, default: 0)"), 
+                 new DocVar("g", "The green component of the color. (optional, default: 0)"), 
+                 new DocVar("b", "The blue component of the color. (optional, default: 0)"), 
+                 new DocVar("a", "The alpha component of the color. (optional, default: 0)")
                 ],
                 new DocVar("c", "The Color object.")),
    new DocMethod("toString",
@@ -467,7 +478,7 @@ var moduleClass = new DocClass("Modules",
   "The module system allows you to split your source code into modular javascript files. The functions in this module are available in the global namespace.",
   [],
   [
-   new DocMethod("[static] require",
+   new DocMethod("[global] require",
                  "Requires that the code of the source file with the specified name is included into this source file. The file is searched in the current search directories as listed in the '__PATH__' array. The current project directory is automatically added to the __PATH__. You can manually add other directories to the __PATH__ variable.",
                  [new DocVar("filename", "The name of the javascript source file (with its file extension) you want to include. NOT a full filepath. (string)")])
   ]);
@@ -486,7 +497,8 @@ app.controller('DocumentationController', function($scope){
 					  rayQueryClass,
             colorClass,
             drawerClass,
-            moduleClass]
+            moduleClass,
+            debugClass]
 
   $scope.classes.sort(function(a, b){
       if(a.name < b.name) return -1;
